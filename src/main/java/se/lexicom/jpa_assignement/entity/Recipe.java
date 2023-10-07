@@ -18,8 +18,8 @@ public class Recipe {
             CascadeType.DETACH,
             CascadeType.REFRESH},
             orphanRemoval = true,
-            fetch = FetchType.LAZY/*,
-    mappedBy = "recipe"*/)
+            fetch = FetchType.LAZY,
+    mappedBy = "recipe")
     private List<RecipeIngredient> ingredients;
 
     @OneToOne(cascade = CascadeType.ALL)
