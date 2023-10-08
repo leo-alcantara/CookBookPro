@@ -50,6 +50,18 @@ public class Recipe {
 
     public Recipe(String recipeName) {
         this.recipeName = recipeName;
+<<<<<<< HEAD:src/main/java/se/lexicom/jpa_assignement/entity/Recipe.java
+=======
+        //setIngredients(ingredients);
+        for (RecipeIngredient i : ingredients) {
+            addRecipeIngredient(i);
+        }
+        setInstructions(instructions);
+        //setCategories(categories);
+        for (RecipeCategory c : categories) {
+            addRecipeCategory(c);
+        }
+>>>>>>> 712dc43fe14c6bbfb5cd39f2ac766a5f33673c97:src/main/java/se/lexicom/jpa_assignement/model/Recipe.java
     }
 
     public Recipe(String recipeName, List<RecipeIngredient> ingredients, RecipeInstruction instructions,

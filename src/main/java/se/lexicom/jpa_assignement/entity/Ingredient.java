@@ -8,7 +8,7 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ingredientId;
+    private Integer ingredientId;
     private String ingredientName;
 
     public Ingredient() {
