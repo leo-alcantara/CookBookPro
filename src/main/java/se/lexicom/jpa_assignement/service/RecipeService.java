@@ -2,7 +2,7 @@ package se.lexicom.jpa_assignement.service;
 
 import se.lexicom.jpa_assignement.dto.RecipeDto;
 import se.lexicom.jpa_assignement.dto.RecipeFormDto;
-import se.lexicom.jpa_assignement.entity.Recipe;
+//import se.lexicom.jpa_assignement.entity.Recipe;
 
 import java.util.Collection;
 import java.util.List;

@@ -2,7 +2,7 @@ package se.lexicom.jpa_assignement.DAO;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import se.lexicom.jpa_assignement.entity.Recipe;
+//import se.lexicom.jpa_assignement.entity.Recipe;
 import se.lexicom.jpa_assignement.exceptions.ExceptionManager;
 import se.lexicom.jpa_assignement.entity.RecipeCategory;
 
