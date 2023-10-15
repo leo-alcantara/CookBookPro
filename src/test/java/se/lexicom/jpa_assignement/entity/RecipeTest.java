@@ -1,33 +1,26 @@
-package se.lexicom.jpa_assignement.model;
+package se.lexicom.jpa_assignement.entity;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.transaction.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-@AutoConfigureTestEntityManager
-@AutoConfigureTestDatabase
-@Transactional
+
 class RecipeTest {
 
     @Autowired
     TestEntityManager testEntityManager;
 
-    private Recipe recipe;
+
     private Recipe testRecipe;
-    private Recipe testRecipe2;
-    private Recipe testRecipe3;
+
 
     private List<RecipeIngredient> ingredientsList;
     private List<RecipeIngredient> ingredientsList2;
@@ -35,7 +28,7 @@ class RecipeTest {
 
     private RecipeInstruction recipeInstruction;
 
-    private List<RecipeCategory> recipeCategories;
+    private Set<RecipeCategory> recipeCategories;
 
     private Ingredient ingredient;
     private Ingredient ingredient2;
@@ -58,14 +51,13 @@ class RecipeTest {
         ingredientsList = new ArrayList<>();
         ingredientsList2 = new ArrayList<>();
         ingredientsList3 = new ArrayList<>();
-        recipeCategories = new ArrayList<>();
+        recipeCategories = new HashSet<>();
         ingredient = new Ingredient("Salt");
         ingredient2 = new Ingredient("Onion");
         ingredient3 = new Ingredient("Garlic");
         recipes = new ArrayList<>();
         recipeIngredient = new RecipeIngredient(ingredient, 10, Measurement.GRAM, testRecipe);
-        recipeIngredient2 = new RecipeIngredient(ingredient2, 10, Measurement.KILO, testRecipe2);
-        recipeIngredient3 = new RecipeIngredient(ingredient3, 20, Measurement.GRAM, testRecipe3);
+
         recipeCategory = new RecipeCategory("BBQ", recipes);
         recipeCategory2 = new RecipeCategory("Meat", recipes);
         recipeCategory3 = new RecipeCategory("Soups", recipes);
@@ -79,12 +71,8 @@ class RecipeTest {
         categoryNames.add("Vegan");
         categoryNames.add(ingredient3.getIngredientName());
 
-        testRecipe = testEntityManager
-                .persist(new Recipe("Feijoada", ingredientsList, recipeInstruction, recipeCategories));
-        testRecipe2 = testEntityManager
-                .persist(new Recipe("Onion Soup", ingredientsList2, recipeInstruction, recipeCategories));
-        testRecipe3 = testEntityManager
-                .persist(new Recipe("Rib Eye", ingredientsList3, recipeInstruction, recipeCategories));
+        testRecipe = new Recipe("Feijoada", ingredientsList, recipeInstruction, recipeCategories);
+
     }
 
     @Test

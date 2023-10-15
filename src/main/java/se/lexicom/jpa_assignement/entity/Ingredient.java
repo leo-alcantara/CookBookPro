@@ -1,4 +1,4 @@
-package se.lexicom.jpa_assignement.model;
+package se.lexicom.jpa_assignement.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,12 +11,16 @@ public class Ingredient {
     private Integer ingredientId;
     private String ingredientName;
 
-
     public Ingredient() {
     }
 
     public Ingredient(String ingredient) {
         this.ingredientName = ingredient;
+    }
+
+    public Ingredient(int ingredientId, String ingredientName) {
+        this.ingredientId = ingredientId;
+        this.ingredientName = ingredientName;
     }
 
     public int getIngredientId() {

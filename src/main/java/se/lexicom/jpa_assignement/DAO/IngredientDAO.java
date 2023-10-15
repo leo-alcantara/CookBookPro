@@ -1,10 +1,8 @@
 package se.lexicom.jpa_assignement.DAO;
 
-import se.lexicom.jpa_assignement.model.Ingredient;
+import se.lexicom.jpa_assignement.entity.Ingredient;
 
 public interface IngredientDAO extends GenericCRUDMethods <Ingredient, Integer>{
 
-    Ingredient findIngredientByName(String ingredientName);
-
-    Ingredient findIngredientByNameContain(String ingredientName);
+    Ingredient findIngredientByNameContainsIgnoreCase(String ingredientName);
 }

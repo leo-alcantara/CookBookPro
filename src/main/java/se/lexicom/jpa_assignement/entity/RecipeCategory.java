@@ -1,6 +1,4 @@
-package se.lexicom.jpa_assignement.model;
-
-import se.lexicom.jpa_assignement.exceptions.ExceptionManager;
+package se.lexicom.jpa_assignement.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,8 +14,6 @@ public class RecipeCategory {
     private String category;
 
     @ManyToMany(cascade = {CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.PERSIST,
             CascadeType.REFRESH},
             fetch = FetchType.LAZY)
     @JoinTable(name = "recipes_categories",
@@ -26,6 +22,18 @@ public class RecipeCategory {
     private List<Recipe> recipes;
 
     public RecipeCategory() {
+        recipes = new ArrayList<>();
+    }
+
+    public RecipeCategory(int recipeCategoryId, String category, List<Recipe> recipes) {
+        this.recipeCategoryId = recipeCategoryId;
+        this.category = category;
+        this.recipes = recipes;
+    }
+
+    public RecipeCategory(String category) {
+        this.category = category;
+        recipes = new ArrayList<>();
     }
 
     public RecipeCategory(String category, List<Recipe> recipes) {
@@ -33,28 +41,6 @@ public class RecipeCategory {
         this.recipes = recipes;
     }
 
-    //Convenience Methods
-    public boolean addRecipe(Recipe recipe){
-        if(recipe==null) throw new ExceptionManager("Parameter can not be null");
-        if(recipes==null)recipes= new ArrayList<>();
-        if(!recipes.contains(recipe)){
-            recipe.addRecipeCategory(this);
-            this.getRecipes().add(recipe);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean removeRecipe(Recipe recipe){
-        if(recipe==null) throw new ExceptionManager("Parameter can not be null");
-        if(recipes==null)recipes= new ArrayList<>();
-        if(recipes.contains(recipe)){
-            this.recipes.remove(recipe);
-            recipe.removeRecipeCategory(null);
-            return true;
-        }
-        return false;
-    }
 
     public int getRecipeCategoryId() {
         return recipeCategoryId;
@@ -73,6 +59,9 @@ public class RecipeCategory {
     }
 
     public List<Recipe> getRecipes() {
+        if (Objects.isNull(recipes)) {
+            recipes = new ArrayList<>();
+        }
         return recipes;
     }
 

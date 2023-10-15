@@ -1,6 +1,4 @@
-package se.lexicom.jpa_assignement.model;
-
-import org.hibernate.annotations.GenericGenerator;
+package se.lexicom.jpa_assignement.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -9,11 +7,14 @@ import java.util.Objects;
 public class RecipeIngredient {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private String recipeIngredientId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int recipeIngredientId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH},
+            fetch = FetchType.LAZY)
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
@@ -24,11 +25,25 @@ public class RecipeIngredient {
             CascadeType.MERGE,
             CascadeType.DETACH,
             CascadeType.REFRESH},
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "recipe_id")
+            fetch = FetchType.LAZY)
+    //@JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
     public RecipeIngredient() {
+    }
+
+    public RecipeIngredient(Ingredient ingredient, double amount, Measurement measurement) {
+        this.ingredient = ingredient;
+        this.amount = amount;
+        this.measurement = measurement;
+    }
+
+    public RecipeIngredient(int recipeIngredientId, Ingredient ingredient, double amount, Measurement measurement, Recipe recipe) {
+        this.recipeIngredientId = recipeIngredientId;
+        this.ingredient = ingredient;
+        this.amount = amount;
+        this.measurement = measurement;
+        this.recipe = recipe;
     }
 
     public RecipeIngredient(Ingredient ingredient, double amount, Measurement measurement, Recipe recipe) {
@@ -39,12 +54,11 @@ public class RecipeIngredient {
     }
 
 
-
-    public String getRecipeIngredientId() {
+    public int getRecipeIngredientId() {
         return recipeIngredientId;
     }
 
-    public void setRecipeIngredientId(String recipeIngredientId) {
+    public void setRecipeIngredientId(int recipeIngredientId) {
         this.recipeIngredientId = recipeIngredientId;
     }
 

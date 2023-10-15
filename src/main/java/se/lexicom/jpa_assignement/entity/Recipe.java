@@ -1,11 +1,9 @@
-package se.lexicom.jpa_assignement.model;
+package se.lexicom.jpa_assignement.entity;
 
 import se.lexicom.jpa_assignement.exceptions.ExceptionManager;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Recipe {
@@ -16,7 +14,7 @@ public class Recipe {
     private String recipeName;
 
     @OneToMany(cascade = {CascadeType.PERSIST,
-            CascadeType.MERGE,
+            CascadeType.REMOVE,
             CascadeType.DETACH,
             CascadeType.REFRESH},
             orphanRemoval = true,
@@ -35,14 +33,22 @@ public class Recipe {
             fetch = FetchType.LAZY)
     @JoinTable(name = "recipes_categories",
             joinColumns = @JoinColumn(name = "recipe_id"),
-    inverseJoinColumns = @JoinColumn(name = "recipe_category_id"))
-    private List<RecipeCategory> categories;
+            inverseJoinColumns = @JoinColumn(name = "recipe_category_id"))
+    private Set<RecipeCategory> categories;
 
     public Recipe() {
     }
 
-    public Recipe(String recipeName, List<RecipeIngredient> ingredients,
-                  RecipeInstruction instructions, List<RecipeCategory> categories) {
+    public Recipe(int recipeId, String recipeName, List<RecipeIngredient> ingredients,
+                  RecipeInstruction instructions, Set<RecipeCategory> categories) {
+        this.recipeId = recipeId;
+        this.recipeName = recipeName;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+        this.categories = categories;
+    }
+
+    public Recipe(String recipeName) {
         this.recipeName = recipeName;
         //setIngredients(ingredients);
         for (RecipeIngredient i : ingredients) {
@@ -55,33 +61,42 @@ public class Recipe {
         }
     }
 
-    //Convenience Methods
-    public boolean addRecipeIngredient(RecipeIngredient recipeIngredient){
-        if(recipeIngredient==null) throw new ExceptionManager("Parameter can not be null");
-        if(ingredients==null)ingredients= new ArrayList<>();
-        if(!ingredients.contains(recipeIngredient)){
+    public Recipe(String recipeName, List<RecipeIngredient> ingredients, RecipeInstruction instructions,
+                  Set<RecipeCategory> categories) {
+        this.recipeName = recipeName;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+        this.categories = categories;
+    }
+
+
+    //Convenience Methods. They are not correct according to Mehrdad
+    public boolean addRecipeIngredient(RecipeIngredient recipeIngredient) {
+        if (recipeIngredient == null) throw new ExceptionManager("Parameter can not be null");
+        if (ingredients == null) ingredients = new ArrayList<>();
+        if (!ingredients.contains(recipeIngredient)) {
             recipeIngredient.setRecipe(this);
-            this.getIngredients().add(recipeIngredient);
+            ingredients.add(recipeIngredient);
             return true;
         }
         return false;
     }
 
-    public boolean removeRecipeIngredients(RecipeIngredient recipeIngredient){
-        if(recipeIngredient==null) throw new ExceptionManager("Parameter can not be null");
-        if(ingredients==null)ingredients= new ArrayList<>();
-        if(ingredients.contains(recipeIngredient)){
+    public boolean removeRecipeIngredients(RecipeIngredient recipeIngredient) {
+        if (recipeIngredient == null) throw new ExceptionManager("Parameter can not be null");
+        if (ingredients == null) ingredients = new ArrayList<>();
+        if (ingredients.contains(recipeIngredient)) {
             this.ingredients.remove(recipeIngredient);
             recipeIngredient.setRecipe(null);
             return true;
         }
-       return false;
+        return false;
     }
 
-    public boolean addRecipeCategory (RecipeCategory recipeCategory){
-        if(recipeCategory==null) throw new ExceptionManager("Parameter can not be null");
-        if(categories==null)categories= new ArrayList<>();
-        if(!categories.contains(recipeCategory)){
+    public boolean addRecipeCategory(RecipeCategory recipeCategory) {
+        if (recipeCategory == null) throw new ExceptionManager("Parameter can not be null");
+        if (categories == null) categories = new HashSet<>();
+        if (!categories.contains(recipeCategory)) {
             recipeCategory.getRecipes().add(this);
             categories.add(recipeCategory);
             return true;
@@ -89,10 +104,10 @@ public class Recipe {
         return false;
     }
 
-    public void removeRecipeCategory(RecipeCategory recipeCategory){
-        if(recipeCategory==null) throw new ExceptionManager("Parameter can not be null");
-        if(categories==null)categories= new ArrayList<>();
-        if(categories.contains(recipeCategory)){
+    public void removeRecipeCategory(RecipeCategory recipeCategory) {
+        if (recipeCategory == null) throw new ExceptionManager("Parameter can not be null");
+        if (categories == null) categories = new HashSet<>();
+        if (categories.contains(recipeCategory)) {
             this.categories.remove(recipeCategory);
             recipeCategory.getRecipes().remove(this);
         }
@@ -130,11 +145,11 @@ public class Recipe {
         this.instructions = instructions;
     }
 
-    public List<RecipeCategory> getCategories() {
+    public Set<RecipeCategory> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<RecipeCategory> categories) {
+    public void setCategories(Set<RecipeCategory> categories) {
         this.categories = categories;
     }
 
