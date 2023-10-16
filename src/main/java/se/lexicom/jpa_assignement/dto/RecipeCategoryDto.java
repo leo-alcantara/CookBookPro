@@ -1,8 +1,8 @@
 package se.lexicom.jpa_assignement.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+//import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import java.util.List;
+//import java.util.List;
 
 public class RecipeCategoryDto {
 

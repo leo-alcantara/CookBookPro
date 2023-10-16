@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import se.lexicom.jpa_assignement.dto.RecipeDto;
 import se.lexicom.jpa_assignement.dto.RecipeFormDto;
-import se.lexicom.jpa_assignement.entity.Recipe;
+//import se.lexicom.jpa_assignement.entity.Recipe;
 
 import java.util.List;
 
