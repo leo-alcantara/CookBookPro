@@ -5,6 +5,7 @@ public class IngredientDto {
     private int ingredientId;
     private String ingredientName;
 
+    //Constructors
     public IngredientDto() {
     }
 
@@ -13,6 +14,7 @@ public class IngredientDto {
         this.ingredientName = ingredientName;
     }
 
+    //Getters and Setters
     public int getIngredientId() {
         return ingredientId;
     }

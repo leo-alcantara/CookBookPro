@@ -5,6 +5,7 @@ public class RecipeInstructionDto {
     private int recipeInstructionId;
     private String recipeInstructions;
 
+    //Constructors
     public RecipeInstructionDto() {
     }
 
@@ -13,6 +14,7 @@ public class RecipeInstructionDto {
         this.recipeInstructions = recipeInstructions;
     }
 
+    //Getters and Setters
     public int getRecipeInstructionId() {
         return recipeInstructionId;
     }

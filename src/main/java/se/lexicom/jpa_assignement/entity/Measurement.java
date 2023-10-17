@@ -11,10 +11,12 @@ public enum Measurement {
     private int value;
 
 
+    //Constructor
     Measurement(int value) {
         this.value = value;
     }
 
+    //Getter
     public int getValue() {
         return value;
     }

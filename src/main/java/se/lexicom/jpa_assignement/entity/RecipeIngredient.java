@@ -29,6 +29,7 @@ public class RecipeIngredient {
     //@JoinColumn(name = "recipe_id")
     private Recipe recipe;
 
+    //Constructors
     public RecipeIngredient() {
     }
 
@@ -54,6 +55,7 @@ public class RecipeIngredient {
     }
 
 
+    //Getters and Setters
     public int getRecipeIngredientId() {
         return recipeIngredientId;
     }

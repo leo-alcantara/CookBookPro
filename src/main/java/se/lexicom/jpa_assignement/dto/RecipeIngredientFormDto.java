@@ -16,6 +16,7 @@ public class RecipeIngredientFormDto {
     @JsonBackReference
     private RecipeFormDto recipe;
 
+    //Constructors
     public RecipeIngredientFormDto() {
     }
 
@@ -32,6 +33,7 @@ public class RecipeIngredientFormDto {
         this.recipe = recipe;
     }
 
+    //Getters and Setters
     public String getIngredient() {
         return ingredient;
     }

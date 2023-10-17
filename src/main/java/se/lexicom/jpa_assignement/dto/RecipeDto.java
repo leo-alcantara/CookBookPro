@@ -13,6 +13,8 @@ public class RecipeDto {
     private RecipeInstructionDto instructions;
     private List<RecipeCategoryDto> categories;
 
+
+    //Constructors
     public RecipeDto() {
     }
 
@@ -33,6 +35,7 @@ public class RecipeDto {
         this.categories = categories;
     }
 
+    //Getters and Setters
     public int getRecipeId() {
         return recipeId;
     }

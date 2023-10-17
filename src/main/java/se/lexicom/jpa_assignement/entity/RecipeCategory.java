@@ -21,6 +21,7 @@ public class RecipeCategory {
             inverseJoinColumns = @JoinColumn(name = "recipe_id"))
     private List<Recipe> recipes;
 
+    //Constructors
     public RecipeCategory() {
         recipes = new ArrayList<>();
     }
@@ -42,6 +43,7 @@ public class RecipeCategory {
     }
 
 
+    //Getters and Setters
     public int getRecipeCategoryId() {
         return recipeCategoryId;
     }

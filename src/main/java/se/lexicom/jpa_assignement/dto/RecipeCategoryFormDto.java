@@ -1,6 +1,6 @@
 package se.lexicom.jpa_assignement.dto;
 
-import se.lexicom.jpa_assignement.dto.RecipeDto;
+//import se.lexicom.jpa_assignement.dto.RecipeDto;
 
 import java.util.List;
 
@@ -10,6 +10,8 @@ public class RecipeCategoryFormDto {
     //@JsonBackReference
     private List<RecipeDto> recipes;
 
+
+    //Constructors
     public RecipeCategoryFormDto() {
     }
 
@@ -22,6 +24,7 @@ public class RecipeCategoryFormDto {
         this.recipes = recipes;
     }
 
+    //Getters and Setters
     public String getCategory() {
         return category;
     }

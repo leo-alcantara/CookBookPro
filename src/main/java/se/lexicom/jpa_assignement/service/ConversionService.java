@@ -28,12 +28,13 @@ public class ConversionService {
     }
 
     public RecipeCategoryDto toRecipeCategoryDto(RecipeCategory recipeCategory) {
-
         return toRecipeCategoryDto(recipeCategory, true);
     }
 
     private RecipeCategoryDto toRecipeCategoryDto(RecipeCategory recipeCategory, boolean convertRecipes) {
+        //Initiate List of RecipesDTO
         List<RecipeDto> recipeDtoList = new ArrayList<>();
+        //If boolean is true convert Recipes
         if (convertRecipes) {
             for (Recipe recipe : recipeCategory.getRecipes()) {
                 RecipeDto recipeDto = toRecipeDto(recipe);
@@ -46,20 +47,28 @@ public class ConversionService {
 
     //RECIPE INGREDIENT CONVERTER
     public RecipeIngredient toRecipeIngredient(RecipeIngredientFormDto formDto) {
+
         List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+        //RecipeIngredient recIngredient = new RecipeIngredient(formDto.getIngredient(), formDto.getAmount(), formDto.getMeasurement(), formDto.getRecipe());
+
         for (RecipeIngredient ri : recipeIngredients) {
-            RecipeIngredient recipeIngredient = new RecipeIngredient(ri.getIngredient(), ri.getAmount(),
-                    ri.getMeasurement(), ri.getRecipe());
+            RecipeIngredient recipeIngredient = new RecipeIngredient(ri.getIngredient(), ri.getAmount(), ri.getMeasurement(), ri.getRecipe());
             recipeIngredients.add(recipeIngredient);
         }
+
         Set<RecipeCategory> recipeCategories = new HashSet<>();
+
         for (RecipeCategory rc : recipeCategories) {
             RecipeCategory recipeCategory = new RecipeCategory(rc.getCategory());
             recipeCategories.add(recipeCategory);
         }
+
         RecipeInstruction recipeInstruction = new RecipeInstruction(formDto.getRecipe().getInstructions());
+
         Recipe recipe = new Recipe(formDto.getRecipe().getRecipeName(), recipeIngredients, recipeInstruction, recipeCategories);
+
         Ingredient ingredient = new Ingredient(formDto.getIngredient());
+
         return new RecipeIngredient(0, ingredient, formDto.getAmount(),
                 formDto.getMeasurement(), recipe);
     }

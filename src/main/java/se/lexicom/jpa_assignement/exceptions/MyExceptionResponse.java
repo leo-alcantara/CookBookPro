@@ -13,6 +13,8 @@ public class MyExceptionResponse {
     private String message;
     private String path;
 
+
+    //Constructor
     public MyExceptionResponse(LocalDateTime timeStamp, Integer status, String value,
                                String message, String path) {
         this.timeStamp = timeStamp;
@@ -22,6 +24,7 @@ public class MyExceptionResponse {
         this.path = path;
     }
 
+    //Getters and Setters
     public LocalDateTime getTimeStamp() {
         return timeStamp;
     }

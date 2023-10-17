@@ -19,6 +19,7 @@ public class RecipeFormDto {
     private String instructions;
     private List<String> categories;
 
+    //Constructors
     public RecipeFormDto() {
     }
 
@@ -29,6 +30,7 @@ public class RecipeFormDto {
         this.categories = categories;
     }
 
+    //Getters and Setters
     public String getRecipeName() {
         return recipeName;
     }

@@ -9,7 +9,7 @@ public class RecipeCategoryDto {
     private int recipeCategoryId;
     private String category;
 
-
+    //Constructors
     public RecipeCategoryDto() {
     }
 
@@ -22,6 +22,7 @@ public class RecipeCategoryDto {
         this.category = category;
     }
 
+    //Getters ans Setters
     public int getRecipeCategoryId() {
         return recipeCategoryId;
     }

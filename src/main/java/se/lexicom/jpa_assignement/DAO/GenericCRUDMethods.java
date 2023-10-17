@@ -4,6 +4,7 @@ import java.util.Collection;
 
 public interface GenericCRUDMethods <T, ID> {
 
+    //Generic CRUD methods
     T create(T t);
     T delete(T t);
     Collection<T> findAll();

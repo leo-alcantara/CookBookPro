@@ -5,6 +5,7 @@ public class IngredientFormDto {
 
     private String ingredientName;
 
+    //Constructors
     public IngredientFormDto() {
     }
 
@@ -12,6 +13,7 @@ public class IngredientFormDto {
         this.ingredientName = ingredientName;
     }
 
+    //Getters and Setters
     public String getIngredientName() {
         return ingredientName;
     }

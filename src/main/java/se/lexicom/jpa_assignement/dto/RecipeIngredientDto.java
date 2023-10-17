@@ -12,6 +12,7 @@ public class RecipeIngredientDto {
     @JsonBackReference
     private RecipeDto recipe;
 
+    //Constructors
     public RecipeIngredientDto() {
     }
 
@@ -36,6 +37,7 @@ public class RecipeIngredientDto {
         this.measurement = measurement;
     }
 
+    //Getters and Setters
     public int getRecipeIngredientId() {
         return recipeIngredientId;
     }

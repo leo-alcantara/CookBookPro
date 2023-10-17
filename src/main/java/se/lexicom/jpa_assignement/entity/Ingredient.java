@@ -11,6 +11,7 @@ public class Ingredient {
     private Integer ingredientId;
     private String ingredientName;
 
+    //Constructors
     public Ingredient() {
     }
 
@@ -23,6 +24,7 @@ public class Ingredient {
         this.ingredientName = ingredientName;
     }
 
+    //Getters and Setters
     public int getIngredientId() {
         return ingredientId;
     }

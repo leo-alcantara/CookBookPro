@@ -36,6 +36,7 @@ public class Recipe {
             inverseJoinColumns = @JoinColumn(name = "recipe_category_id"))
     private Set<RecipeCategory> categories;
 
+    //Constructors
     public Recipe() {
     }
 
@@ -113,6 +114,7 @@ public class Recipe {
         }
     }
 
+    //Getters and Setters
     public int getRecipeId() {
         return recipeId;
     }

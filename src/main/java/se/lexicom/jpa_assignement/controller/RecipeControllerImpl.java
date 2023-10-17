@@ -47,6 +47,7 @@ public class RecipeControllerImpl implements RecipeController {
     public ResponseEntity<List<RecipeDto>> find(
             @RequestParam(name = "search", defaultValue = "all") String search,
             @RequestParam(name = "values", defaultValue = "all") String[] values) {
+                
         List<RecipeDto> recipeDtoList;
 
         switch (search) {

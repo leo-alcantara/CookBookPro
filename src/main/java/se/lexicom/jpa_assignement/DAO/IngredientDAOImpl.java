@@ -19,9 +19,13 @@ public class IngredientDAOImpl implements IngredientDAO {
     @Override
     @Transactional
     public Ingredient create(Ingredient ingredient) throws ExceptionManager {
+
+        //Check if input parameters is null, if null throw exception
         if (ingredient == null) {
             throw new ExceptionManager("Can not persist item: " + ingredient);
         }
+
+        //If not null, call entityManager and persist and return instance
         entityManager.persist(ingredient);
         return ingredient;
     }
@@ -29,9 +33,13 @@ public class IngredientDAOImpl implements IngredientDAO {
     @Override
     @Transactional
     public Ingredient delete(Ingredient ingredient) throws ExceptionManager {
+
+        //Check if input parameters is null, if null throw exception
         if (ingredient == null) {
             throw new ExceptionManager("Can not remove item: " + ingredient);
         }
+
+        //If not null, call entityManager and remove and return instance
         entityManager.remove(ingredient);
         return ingredient;
     }
@@ -39,30 +47,42 @@ public class IngredientDAOImpl implements IngredientDAO {
     @Override
     @Transactional
     public List<Ingredient> findAll() {
+
+        //Use entityManager Query Creator to search DB and return List of ingredients 
         return entityManager.createQuery("SELECT i FROM Ingredient i", Ingredient.class).getResultList();
     }
 
     @Override
     @Transactional
     public Ingredient findById(Integer ingredientId) throws ExceptionManager {
+
+        //Check if input parameters is null, if null throw exception
         if (ingredientId == null) {
-            throw new ExceptionManager("Can not find item: " + ingredientId);
+            throw new ExceptionManager("Can not find Ingredient with Id: " + ingredientId);
         }
+
+        //If not null, call entityManager find method and return ingredient instance with matching Id
         return entityManager.find(Ingredient.class, ingredientId);
     }
 
     @Override
     @Transactional
     public Ingredient update(Ingredient ingredient) throws ExceptionManager {
+
+        //Check if input parameters is null, if null throw exception
         if (ingredient == null) {
             throw new ExceptionManager("Can not update item: " + ingredient);
         }
+
+        //If not null, call entityManager merge method to update ingredient instance and return it
         return entityManager.merge(ingredient);
     }
 
     @Override
     @Transactional
     public void clear() {
+
+        //Clear ingredients DB
         entityManager.clear();
     }
 
@@ -70,10 +90,14 @@ public class IngredientDAOImpl implements IngredientDAO {
     @Override
     @Transactional
     public Ingredient findIngredientByNameContainsIgnoreCase(String ingredientName) throws ExceptionManager {
+
+        //Check if input parameters is null, if null throw exception
         if (ingredientName == null) {
             throw new ExceptionManager("Can not find item: " + ingredientName);
         }
-        Optional<Ingredient> ingredient = entityManager.createQuery("SELECT i FROM Ingredient i WHERE UPPER(i.ingredientName) LIKE UPPER(CONCAT('%', :ingredientName, '%') )", Ingredient.class)
+
+        //If not null, query DB to get ingredient based on the name inputed and making the use of streams get first result in case of duplicates and return it if found else throw exception
+        Optional<Ingredient> ingredient = entityManager.createQuery("SELECT i FROM Ingredient i WHERE UPPER(i.ingredientName) LIKE UPPER(CONCAT('%', :ingredientName, '%'))", Ingredient.class)
                 .setParameter("ingredientName", ingredientName).getResultStream().findFirst();
 
         return ingredient.orElseThrow(() -> new ExceptionManager("Ingredient not found " + ingredientName));

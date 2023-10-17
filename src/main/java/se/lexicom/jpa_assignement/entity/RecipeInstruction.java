@@ -14,6 +14,7 @@ public class RecipeInstruction {
     private int recipeInstructionId;
     private String recipeInstructions;
 
+    //Constructors
     public RecipeInstruction() {
     }
 
@@ -27,6 +28,7 @@ public class RecipeInstruction {
     }
 
 
+    //Getters and Setters
     public int getRecipeInstructionId() {
         return recipeInstructionId;
     }

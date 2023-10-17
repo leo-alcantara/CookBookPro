@@ -4,6 +4,7 @@ public class RecipeInstructionFormDto {
 
     private String recipeInstructions;
 
+    //Constructors
     public RecipeInstructionFormDto() {
     }
 
@@ -11,6 +12,7 @@ public class RecipeInstructionFormDto {
         this.recipeInstructions = recipeInstructions;
     }
 
+    //Getters and Setters
     public String getRecipeInstructions() {
         return recipeInstructions;
     }

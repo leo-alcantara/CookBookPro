@@ -7,6 +7,7 @@ public class ValidationErrorResponse extends MyExceptionResponse {
 
     private final List<Violation> violations;
 
+    //Constructors
     public ValidationErrorResponse(LocalDateTime timeStamp, Integer status,
                                    String value, String message, String path,
                                    List<Violation> violations) {
@@ -19,6 +20,7 @@ public class ValidationErrorResponse extends MyExceptionResponse {
         this.violations = violations;
     }
 
+    //Getter
     public List<Violation> getViolations(){
         return violations;
     }
