@@ -1,6 +1,6 @@
 package se.lexicom.jpa_assignement.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +17,11 @@ import java.util.List;
 @CrossOrigin("*")
 public class IngredientControllerImpl implements IngredientController {
 
+    //Initiate Var
     private final IngredientServiceImpl ingredientServiceImpl;
 
-    @Autowired
+    //Controller
+    //@Autowired
     public IngredientControllerImpl(IngredientServiceImpl ingredientServiceImpl) {
         this.ingredientServiceImpl = ingredientServiceImpl;
     }
@@ -45,14 +47,14 @@ public class IngredientControllerImpl implements IngredientController {
     @Override
     @PutMapping
     public ResponseEntity<IngredientDto> update(@RequestBody @Valid IngredientFormDto formDto) {
-            return ResponseEntity.ok().body(ingredientServiceImpl.update(formDto));
+        return ResponseEntity.ok().body(ingredientServiceImpl.update(formDto));
     }
 
-    //NOT SURE IF THIS IS RIGHT
     @Override
     @DeleteMapping
-    public ResponseEntity<IngredientDto> delete(@RequestBody Ingredient ingredient) {
-        return ResponseEntity.ok(ingredientServiceImpl.delete(ingredient));
+    public ResponseEntity<Void> delete(@RequestBody Ingredient ingredient) {
+        ingredientServiceImpl.delete(ingredient);
+        return ResponseEntity.ok().build();
     }
 
     //NOT SURE IF THIS IS RIGHT
@@ -65,7 +67,7 @@ public class IngredientControllerImpl implements IngredientController {
 
     @Override
     @GetMapping("/{ingredient-name}")
-    public ResponseEntity<IngredientDto> findIngredientByNameContainsIgnoreCase(@PathVariable("ingredient-name") String ingredientName) {
+    public ResponseEntity<List<IngredientDto>> findIngredientByNameContainsIgnoreCase(@PathVariable("ingredient-name") String ingredientName) {
         return ResponseEntity.ok(ingredientServiceImpl.findIngredientByNameContainsIgnoreCase(ingredientName));
     }
 

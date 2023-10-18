@@ -92,7 +92,7 @@ public class RecipeCategoryServiceImpl implements RecipeCategoryService {
     public List<RecipeCategoryDto> findByNameIContainsIgnoreCase(String categoryName) {
 
         //Use recipeCategoryList.findByNameIContainsIgnoreCase method to get existing ingredient
-        List<RecipeCategory> foundRecipeCats = recipeCategoryDAO.findByNameIContainsIgnoreCase(categoryName);
+        List<RecipeCategory> foundRecipeCats = recipeCategoryDAO.findByNameContainsIgnoreCase(categoryName);
         List<RecipeCategoryDto> convertedRecipeCats = new ArrayList<>();
 
         //Loop through List of foundRecipeCats and convert RecipeCategory to DTO and add to DTO List to be returned

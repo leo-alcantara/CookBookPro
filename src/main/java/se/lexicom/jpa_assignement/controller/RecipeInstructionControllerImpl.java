@@ -1,6 +1,6 @@
 package se.lexicom.jpa_assignement.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class RecipeInstructionControllerImpl implements RecipeInstructionControl
 
     private final RecipeInstructionServiceImpl recipeInstructionServiceImpl;
 
-    @Autowired
+    //@Autowired
     public RecipeInstructionControllerImpl(RecipeInstructionServiceImpl recipeInstructionServiceImpl) {
         this.recipeInstructionServiceImpl = recipeInstructionServiceImpl;
     }
@@ -50,11 +50,11 @@ public class RecipeInstructionControllerImpl implements RecipeInstructionControl
 
     @Override
     @DeleteMapping
-    public ResponseEntity<RecipeInstructionDto> delete(@RequestBody RecipeInstruction recipeInstruction) {
-        return ResponseEntity.ok(recipeInstructionServiceImpl.delete(recipeInstruction));
+    public ResponseEntity<Void> delete(@RequestBody RecipeInstruction recipeInstruction) {
+        recipeInstructionServiceImpl.delete(recipeInstruction);
+        return ResponseEntity.ok().build();
     }
 
-    //NOT SURE IF THIS IS RIGHT. IT DOESN'T WORK
     @Override
     @DeleteMapping("/clear")
     public ResponseEntity<Void> clear() {

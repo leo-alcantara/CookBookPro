@@ -19,7 +19,7 @@ public interface RecipeController {
 
     ResponseEntity<RecipeDto> update(RecipeFormDto formDto);
 
-    ResponseEntity<RecipeDto> delete(Integer recipeId);
+    ResponseEntity<Void> delete(Integer recipeId);
 
     ResponseEntity<Void> clear();
 

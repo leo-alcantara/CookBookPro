@@ -1,6 +1,6 @@
 package se.lexicom.jpa_assignement.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +19,14 @@ public class RecipeControllerImpl implements RecipeController {
 
     private final RecipeServiceImpl recipeServiceImpl;
 
-    @Autowired
+    //@Autowired
     public RecipeControllerImpl(RecipeServiceImpl recipeServiceImpl) {
         this.recipeServiceImpl = recipeServiceImpl;
     }
 
-    private final List<String> searchTypes = Arrays.asList(
+    /*private final List<String> SEARCHTYPES = Arrays.asList(
             "all", "recipe-name", "ingredient-name", "category-name", "recipe-categories"
-    );
+    );*/
 
     @Override
     @PostMapping
@@ -85,11 +85,11 @@ public class RecipeControllerImpl implements RecipeController {
 
     @Override
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<RecipeDto> delete(@PathVariable("id") Integer recipeId) {
-        return ResponseEntity.ok(recipeServiceImpl.delete(recipeId));
+    public ResponseEntity<Void> delete(@PathVariable("id") Integer recipeId) {
+        recipeServiceImpl.delete(recipeId);
+        return ResponseEntity.ok().build();
     }
 
-    //NOT SURE IF THIS IS RIGHT
     @Override
     @DeleteMapping(path = "/clear")
     public ResponseEntity<Void> clear() {

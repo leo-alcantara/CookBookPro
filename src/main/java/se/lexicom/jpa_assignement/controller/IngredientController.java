@@ -18,9 +18,9 @@ public interface IngredientController {
 
     ResponseEntity<IngredientDto> update(IngredientFormDto formDto);
 
-    ResponseEntity<IngredientDto> delete(Ingredient ingredient);
+    ResponseEntity<Void> delete(Ingredient ingredient);
 
     ResponseEntity<Void> clear();
 
-    ResponseEntity<IngredientDto> findIngredientByNameContainsIgnoreCase(String ingredientName);
+    ResponseEntity<List<IngredientDto>> findIngredientByNameContainsIgnoreCase(String ingredientName);
 }

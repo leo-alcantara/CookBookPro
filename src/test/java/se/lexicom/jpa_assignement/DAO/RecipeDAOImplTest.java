@@ -191,7 +191,7 @@ class RecipeDAOImplTest {
         String category = null;
         //Act
         //Assert
-        assertThrows(ExceptionManager.class, ()->recipeDAO.findRecipeByCategoryContainsIgnoreCase(category));
+        assertThrows(ExceptionManager.class, () -> recipeDAO.findRecipeByCategoryContainsIgnoreCase(category));
     }
 
     @Test

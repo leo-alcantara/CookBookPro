@@ -17,7 +17,7 @@ public interface RecipeCategoryController {
 
     ResponseEntity<RecipeCategoryDto> update(RecipeCategoryFormDto formDto);
 
-    ResponseEntity<RecipeCategoryDto> delete(RecipeCategory recipeCategory);
+    ResponseEntity<Void> delete(RecipeCategory recipeCategory);
 
     ResponseEntity<Void> clear();
 }

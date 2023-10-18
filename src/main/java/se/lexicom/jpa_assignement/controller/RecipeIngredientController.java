@@ -18,7 +18,7 @@ public interface RecipeIngredientController {
 
     ResponseEntity<RecipeIngredientDto> update(@RequestBody RecipeIngredientFormDto formDto);
 
-    ResponseEntity<RecipeIngredientDto> delete(RecipeIngredient recipeIngredient);
+    ResponseEntity<Void> delete(RecipeIngredient recipeIngredient);
 
     ResponseEntity<Void> clear();
 }
