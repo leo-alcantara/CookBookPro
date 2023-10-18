@@ -8,7 +8,6 @@ import se.lexicom.jpa_assignement.entity.Ingredient;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class IngredientDAOImpl implements IngredientDAO {
@@ -89,7 +88,7 @@ public class IngredientDAOImpl implements IngredientDAO {
 
     @Override
     @Transactional
-    public Ingredient findIngredientByNameContainsIgnoreCase(String ingredientName) throws ExceptionManager {
+    public List<Ingredient> findIngredientByNameContainsIgnoreCase(String ingredientName) throws ExceptionManager {
 
         //Check if input parameters is null, if null throw exception
         if (ingredientName == null) {
@@ -97,10 +96,10 @@ public class IngredientDAOImpl implements IngredientDAO {
         }
 
         //If not null, query DB to get ingredient based on the name inputed and making the use of streams get first result in case of duplicates and return it if found else throw exception
-        Optional<Ingredient> ingredient = entityManager.createQuery("SELECT i FROM Ingredient i WHERE UPPER(i.ingredientName) LIKE UPPER(CONCAT('%', :ingredientName, '%'))", Ingredient.class)
-                .setParameter("ingredientName", ingredientName).getResultStream().findFirst();
+        List<Ingredient> ingredients = entityManager.createQuery("SELECT i FROM Ingredient i WHERE UPPER(i.ingredientName) LIKE UPPER(CONCAT('%', :ingredientName, '%'))", Ingredient.class)
+                .setParameter("ingredientName", ingredientName).getResultList();
 
-        return ingredient.orElseThrow(() -> new ExceptionManager("Ingredient not found " + ingredientName));
+        return ingredients;
     }
 
 }

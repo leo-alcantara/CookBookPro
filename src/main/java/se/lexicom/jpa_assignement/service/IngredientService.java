@@ -15,9 +15,9 @@ public interface IngredientService {
 
     IngredientDto update(IngredientFormDto formDto);
 
-    IngredientDto delete(Ingredient ingredient);
+    void delete(Ingredient ingredient);
 
     void clear();
 
-    IngredientDto findIngredientByNameContainsIgnoreCase(String ingredientName);
+    List<IngredientDto> findIngredientByNameContainsIgnoreCase(String ingredientName);
 }

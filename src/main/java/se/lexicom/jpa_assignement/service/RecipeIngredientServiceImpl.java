@@ -13,10 +13,12 @@ import java.util.List;
 
 @Service
 public class RecipeIngredientServiceImpl implements RecipeIngredientService {
-
+    
+    //Initiate Vars
     private final RecipeIngredientDAOImpl recipeIngredientDAO;
     private final ConversionService convert;
 
+    //Autowired Constructor
     @Autowired
     public RecipeIngredientServiceImpl(RecipeIngredientDAOImpl recipeIngredientDAO, ConversionService convert) {
         this.recipeIngredientDAO = recipeIngredientDAO;
@@ -26,31 +28,51 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService {
     @Override
     @Transactional
     public RecipeIngredientDto createRecipeIngredient(RecipeIngredientFormDto formDto) {
+
+         //Use recipeIngredientDAO.create method to create RecipeIngredient
         RecipeIngredient saved = recipeIngredientDAO.create(convert.toRecipeIngredient(formDto));
+
+        //Convert again and return the DTO Form
         return convert.toRecipeIngredientDto(saved);
     }
 
     @Override
     @Transactional
     public RecipeIngredientDto findById(Integer recipeIngredientId) {
+
+        //Use recipeIngredientDAO.findById method to find Ingredient
         RecipeIngredient foundRecipeIngredient = recipeIngredientDAO.findById(recipeIngredientId);
+
+        //Convert again and return the DTO Form
         return convert.toRecipeIngredientDto(foundRecipeIngredient);
     }
 
     @Override
     @Transactional
     public List<RecipeIngredientDto> findAll() {
+
+        //Use recipeIngredientDAO.findAll method to get all RecipeIngredient
         List<RecipeIngredient> recipeIngredientList = recipeIngredientDAO.findAll();
+
+        //Instantiate the DTO List
         List<RecipeIngredientDto> recipeIngredientDtoList = new ArrayList<>();
+
+        //Iterate through recipeIngredientList and add a converted instance of the RecipeIngredient to the List recipeIngredientDtoList
         recipeIngredientList.forEach((ri) -> recipeIngredientDtoList.add(convert.toRecipeIngredientDto(ri)));
+
+        //Return DTO List
         return recipeIngredientDtoList;
     }
 
     @Override
     @Transactional
     public RecipeIngredientDto update(RecipeIngredientFormDto formDto) {
-        RecipeIngredient original = recipeIngredientDAO.update(convert.toRecipeIngredient(formDto));
-        return convert.toRecipeIngredientDto(original);
+
+        //Use recipeIngredientDAO.update method to update existing RecipeIngredient
+        RecipeIngredient recipeIngredientToUpdate = recipeIngredientDAO.update(convert.toRecipeIngredient(formDto));
+
+        //Convert again and return the DTO Form
+        return convert.toRecipeIngredientDto(recipeIngredientToUpdate);
     }
 
     @Override

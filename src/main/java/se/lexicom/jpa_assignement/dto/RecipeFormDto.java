@@ -17,13 +17,13 @@ public class RecipeFormDto {
     private List<RecipeIngredientFormDto> ingredients;
     @NotBlank
     private String instructions;
-    private List<String> categories;
+    private List<RecipeCategoryFormDto> categories;
 
     //Constructors
     public RecipeFormDto() {
     }
 
-    public RecipeFormDto(String recipeName, List<RecipeIngredientFormDto> ingredients, String instructions, List<String> categories) {
+    public RecipeFormDto(String recipeName, List<RecipeIngredientFormDto> ingredients, String instructions, List<RecipeCategoryFormDto> categories) {
         this.recipeName = recipeName;
         this.ingredients = ingredients;
         this.instructions = instructions;
@@ -55,11 +55,11 @@ public class RecipeFormDto {
         this.instructions = instructions;
     }
 
-    public List<String> getCategories() {
+    public List<RecipeCategoryFormDto> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<String> categories) {
+    public void setCategories(List<RecipeCategoryFormDto> categories) {
         this.categories = categories;
     }
 }

@@ -16,7 +16,10 @@ public interface RecipeCategoryService {
 
     RecipeCategoryDto update(RecipeCategoryFormDto formDto);
 
-    RecipeCategoryDto delete(RecipeCategory recipeCategory);
+    void delete(RecipeCategory recipeCategory);
 
     void clear();
+
+    List<RecipeCategoryDto> findByNameIContainsIgnoreCase(String categoryName);
+    
 }

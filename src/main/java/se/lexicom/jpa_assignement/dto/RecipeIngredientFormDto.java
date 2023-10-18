@@ -10,7 +10,7 @@ public class RecipeIngredientFormDto {
 
     @NotBlank
     @Size(min = 2, max = 50, message = "Exceeded number of characters.")
-    private String ingredient;
+    private IngredientFormDto ingredient;
     private double amount;
     private Measurement measurement;
     @JsonBackReference
@@ -20,13 +20,13 @@ public class RecipeIngredientFormDto {
     public RecipeIngredientFormDto() {
     }
 
-    public RecipeIngredientFormDto(String ingredient, double amount, Measurement measurement) {
+    public RecipeIngredientFormDto(IngredientFormDto ingredient, double amount, Measurement measurement) {
         this.ingredient = ingredient;
         this.amount = amount;
         this.measurement = measurement;
     }
 
-    public RecipeIngredientFormDto(String ingredient, double amount, Measurement measurement, RecipeFormDto recipe) {
+    public RecipeIngredientFormDto(IngredientFormDto ingredient, double amount, Measurement measurement, RecipeFormDto recipe) {
         this.ingredient = ingredient;
         this.amount = amount;
         this.measurement = measurement;
@@ -34,11 +34,11 @@ public class RecipeIngredientFormDto {
     }
 
     //Getters and Setters
-    public String getIngredient() {
+    public IngredientFormDto getIngredient() {
         return ingredient;
     }
 
-    public void setIngredient(String ingredient) {
+    public void setIngredient(IngredientFormDto ingredient) {
         this.ingredient = ingredient;
     }
 

@@ -8,7 +8,7 @@ public class RecipeCategoryFormDto {
 
     private String category;
     //@JsonBackReference
-    private List<RecipeDto> recipes;
+    private List<RecipeFormDto> recipes;
 
 
     //Constructors
@@ -19,7 +19,7 @@ public class RecipeCategoryFormDto {
         this.category = category;
     }
 
-    public RecipeCategoryFormDto(String category, List<RecipeDto> recipes) {
+    public RecipeCategoryFormDto(String category, List<RecipeFormDto> recipes) {
         this.category = category;
         this.recipes = recipes;
     }
@@ -33,11 +33,11 @@ public class RecipeCategoryFormDto {
         this.category = category;
     }
 
-    public List<RecipeDto> getRecipes() {
+    public List<RecipeFormDto> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(List<RecipeDto> recipes) {
+    public void setRecipes(List<RecipeFormDto> recipes) {
         this.recipes = recipes;
     }
 }

@@ -11,17 +11,18 @@ import se.lexicom.jpa_assignement.dto.RecipeIngredientFormDto;
 import se.lexicom.jpa_assignement.entity.*;
 import se.lexicom.jpa_assignement.exceptions.ExceptionManager;
 import se.lexicom.jpa_assignement.dto.RecipeFormDto;
-
 import java.util.*;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
+    //Initiate Vars
     private final RecipeDAOImpl recipeDAO;
     private final ConversionService convert;
     private final RecipeCategoryDAOImpl recipeCategoryDAO;
     private final IngredientDAOImpl ingredientDAO;
 
+    //Autowired Constructor
     @Autowired
     public RecipeServiceImpl(RecipeDAOImpl recipeDAO, ConversionService convert,
                              RecipeCategoryDAOImpl recipeCategoryDAO, IngredientDAOImpl ingredientDAO) {

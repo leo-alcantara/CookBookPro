@@ -14,9 +14,11 @@ import java.util.List;
 @Service
 public class IngredientServiceImpl implements IngredientService {
 
+    //Initiate Vars
     private final IngredientDAOImpl ingredientDAO;
     private final ConversionService convert;
 
+    //Autowired Constructor
     @Autowired
     public IngredientServiceImpl(IngredientDAOImpl ingredientDAO, ConversionService convert) {
         this.ingredientDAO = ingredientDAO;
@@ -26,38 +28,57 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     @Transactional
     public IngredientDto createIngredient(IngredientFormDto form) {
-        Ingredient saved = ingredientDAO.create(convert.toIngredient(form));
-        return convert.toIngredientDto(saved);
+
+        //Use ingredientDAO.create method to create Ingredient
+        Ingredient ingredientToCreate = ingredientDAO.create(convert.toIngredient(form));
+
+        //Convert again and return the DTO Form
+        return convert.toIngredientDto(ingredientToCreate);
     }
 
     @Override
     @Transactional
     public IngredientDto findById(Integer ingredientId) {
-        Ingredient fondIngredient = ingredientDAO.findById(ingredientId);
-        return convert.toIngredientDto(fondIngredient);
+
+        //Use ingredientDAO.findById method to find Ingredient
+        Ingredient foundIngredient = ingredientDAO.findById(ingredientId);
+
+        //Convert again and return the DTO Form
+        return convert.toIngredientDto(foundIngredient);
     }
 
     @Override
     @Transactional
     public List<IngredientDto> findAll() {
+
+        //Use ingredientDAO.findAll method to get all Ingredients
         List<Ingredient> ingredientList = ingredientDAO.findAll();
+
+        //Instantiate the DTO List
         List<IngredientDto> ingredientDtoList = new ArrayList<>();
+
+        //Iterate through ingredientList and add a converted instance of the Ingredient to the List ingredientDtoList
         ingredientList.forEach((i) -> ingredientDtoList.add(convert.toIngredientDto(i)));
+
+        //Return DTO List
         return ingredientDtoList;
     }
 
     @Override
     @Transactional
     public IngredientDto update(IngredientFormDto formDto) {
-        Ingredient original = ingredientDAO.update(convert.toIngredient(formDto));
-        return convert.toIngredientDto(original);
+
+        //Use ingredientDAO.update method to update existing ingredient
+        Ingredient ingredientToUpdate = ingredientDAO.update(convert.toIngredient(formDto));
+
+        //Convert again and return the DTO Form
+        return convert.toIngredientDto(ingredientToUpdate);
     }
 
     @Override
     @Transactional
-    public IngredientDto delete(Ingredient ingredient) {
+    public void delete(Ingredient ingredient) {
         ingredientDAO.delete(ingredient);
-        return convert.toIngredientDto(ingredient);
     }
 
     @Override
@@ -68,8 +89,16 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     @Transactional
-    public IngredientDto findIngredientByNameContainsIgnoreCase(String ingredientName) {
-        Ingredient foundIngredient = ingredientDAO.findIngredientByNameContainsIgnoreCase(ingredientName);
-        return convert.toIngredientDto(foundIngredient);
+    public List<IngredientDto> findIngredientByNameContainsIgnoreCase(String ingredientName) {
+
+        //Use ingredientDAO.findIngredientByNameContainsIgnoreCase method to get existing ingredient
+        List<Ingredient> foundIngredients = ingredientDAO.findIngredientByNameContainsIgnoreCase(ingredientName);
+        List<IngredientDto> convertedIngredients = new ArrayList<>();
+
+        //Loop through List of foundIngredients and convert Ingredients to DTO and add to DTO List to be returned
+        foundIngredients.forEach((ingredient) -> convertedIngredients.add(convert.toIngredientDto(ingredient)));
+
+        //Return the DTO Form List
+        return convertedIngredients;
     }
 }

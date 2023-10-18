@@ -1,21 +1,21 @@
 package se.lexicom.jpa_assignement.dto;
 
-//import com.fasterxml.jackson.annotation.JsonBackReference;
-
-//import java.util.List;
+import java.util.List;
 
 public class RecipeCategoryDto {
 
     private int recipeCategoryId;
     private String category;
+    private List<RecipeDto> recipes;
 
     //Constructors
     public RecipeCategoryDto() {
     }
 
-    public RecipeCategoryDto(int recipeCategoryId, String category) {
+    public RecipeCategoryDto(int recipeCategoryId, String category, List<RecipeDto> recipes) {
         this.recipeCategoryId = recipeCategoryId;
         this.category = category;
+        this.recipes = recipes;
     }
 
     public RecipeCategoryDto(String category) {
@@ -37,6 +37,15 @@ public class RecipeCategoryDto {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+
+    public List<RecipeDto> getRecipes() {
+        return this.recipes;
+    }
+
+    public void setRecipes(List<RecipeDto> recipes) {
+        this.recipes = recipes;
     }
 
     @Override
