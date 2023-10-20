@@ -36,9 +36,9 @@ public class RecipeDAOImpl implements RecipeDAO {
     public Recipe delete(Recipe recipe) throws ExceptionManager {
 
         //Check if input parameters is null, if null throw exception
-        if (recipe == null) {
+        /*if (recipe == null) {
             throw new ExceptionManager(recipe + " recipe does not exist in the database.");
-        }
+        }*/
 
         //If not null, call entityManager and remove and return instance
         entityManager.remove(recipe);
@@ -92,9 +92,7 @@ public class RecipeDAOImpl implements RecipeDAO {
     public List<Recipe> findRecipeByNameContainsIgnoreCase(String recipeName) throws ExceptionManager {
 
         //Check if input parameters is null, if null throw exception
-        if (recipeName == null) {
-            throw new ExceptionManager("Can not find item: " + recipeName);
-        }
+        //if (recipeName == null) throw new ExceptionManager("Can not find item: " + recipeName);
 
         //If not null, query DB to get Recipe based on the name inputed and return List of Recipes
         return entityManager.createQuery("SELECT r FROM Recipe r WHERE UPPER(r.recipeName) LIKE UPPER(CONCAT('%', ?1 , '%'))", Recipe.class)
@@ -106,9 +104,7 @@ public class RecipeDAOImpl implements RecipeDAO {
     public List<Recipe> findRecipeByIngredientNameContainsIgnoreCase(String ingredientName) throws ExceptionManager {
 
         //Check if input parameters is null, if null throw exception
-        if (ingredientName == null) {
-            throw new ExceptionManager("There is no such ingredient called: " + ingredientName);
-        }
+        //if (ingredientName == null) throw new ExceptionManager("There is no such ingredient called: " + ingredientName);
 
         //If not null, query DB to get Recipe based on the ingredient name inputed and return List of Recipes
         return entityManager.createQuery("SELECT r FROM Recipe r JOIN FETCH r.ingredients AS ri WHERE UPPER(ri.ingredient.ingredientName) LIKE UPPER(CONCAT('%', ?1, '%'))", Recipe.class)
@@ -120,9 +116,7 @@ public class RecipeDAOImpl implements RecipeDAO {
     public List<Recipe> findRecipeByCategoryContainsIgnoreCase(String categoryName) throws ExceptionManager {
 
         //Check if input parameters is null, if null throw exception
-        if (categoryName == null) {
-            throw new ExceptionManager("There is no such category called: " + categoryName);
-        }
+        //if (categoryName == null) throw new ExceptionManager("There is no such category called: " + categoryName);
 
         //If not null, query DB to get Recipes based on the Categories names inputed and return List of Recipes
         return entityManager.createQuery("SELECT r FROM Recipe r JOIN FETCH r.categories AS rc WHERE UPPER(rc.category) LIKE UPPER(CONCAT('%', ?1 , '%'))", Recipe.class)
@@ -134,9 +128,7 @@ public class RecipeDAOImpl implements RecipeDAO {
     public List<Recipe> findRecipeSeveralCategories(Collection<String> recipeCategories) throws ExceptionManager {
         
         //Check if input parameters is null, if null throw exception
-        if (recipeCategories == null) {
-            throw new ExceptionManager("There is no such category called: " + recipeCategories);
-        }
+        //if (recipeCategories == null) throw new ExceptionManager("There is no such category called: " + recipeCategories);
 
         //If not null, query DB to get Recipes based on the List of Categories names inputed and return List of Recipes
         return entityManager.createQuery("SELECT r FROM Recipe r JOIN FETCH r.categories AS rc WHERE rc.category in (:recipeCategory)", Recipe.class)

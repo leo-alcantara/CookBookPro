@@ -7,22 +7,21 @@ import se.lexicom.jpa_assignement.DAO.IngredientDAOImpl;
 import se.lexicom.jpa_assignement.DAO.RecipeCategoryDAOImpl;
 import se.lexicom.jpa_assignement.DAO.RecipeDAOImpl;
 import se.lexicom.jpa_assignement.dto.RecipeDto;
-//import se.lexicom.jpa_assignement.dto.RecipeIngredientFormDto;
+import se.lexicom.jpa_assignement.dto.RecipeIngredientFormDto;
 import se.lexicom.jpa_assignement.entity.*;
 import se.lexicom.jpa_assignement.exceptions.ExceptionManager;
 import se.lexicom.jpa_assignement.dto.RecipeFormDto;
+
 import java.util.*;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
 
-    //Initiate Vars
     private final RecipeDAOImpl recipeDAO;
     private final ConversionService convert;
     private final RecipeCategoryDAOImpl recipeCategoryDAO;
     private final IngredientDAOImpl ingredientDAO;
 
-    //Autowired Constructor
     @Autowired
     public RecipeServiceImpl(RecipeDAOImpl recipeDAO, ConversionService convert,
                              RecipeCategoryDAOImpl recipeCategoryDAO, IngredientDAOImpl ingredientDAO) {
@@ -35,15 +34,11 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @Transactional
     public RecipeDto createRecipe(RecipeFormDto formDto) {
-
-        //Use recipeDAO.create method to create Recipe
-        Recipe recipe = recipeDAO.create(convert.toRecipe(formDto));
-
-        //Check if recioe already exixts in DB and throw exception if it does
+        Recipe recipe = convert.toRecipe(formDto);
         if (!recipeDAO.findRecipeByNameContainsIgnoreCase(recipe.getRecipeName()).isEmpty()) {
             throw new ExceptionManager("Recipe already exists");
         }
-        /*Set<RecipeCategory> categorySet = new HashSet<>();
+        Set<RecipeCategory> categorySet = new HashSet<>();
         for (String categoryName : formDto.getCategories()) {
             RecipeCategory category = recipeCategoryDAO.findByName(categoryName);
             if (Objects.isNull(category)) {
@@ -66,6 +61,7 @@ public class RecipeServiceImpl implements RecipeService {
         }
         recipeIngredient.setIngredient(ingredient);
 
+
         RecipeInstruction recipeInstruction = new RecipeInstruction(recipe.getInstructions().getRecipeInstructionId(), formDto.getInstructions());
         recipe.setInstructions(recipeInstruction);
 
@@ -73,34 +69,23 @@ public class RecipeServiceImpl implements RecipeService {
         Recipe createdRecipe = recipeDAO.create(recipe);
         RecipeDto convertedRecipe = convert.toRecipeDto(createdRecipe);
         System.out.println("createdRecipe.getIngredients() = " + createdRecipe.getIngredients());
-        System.out.println("convertedRecipe.getIngredients() = " + convertedRecipe.getIngredients());*/
-        //Convert again and return the DTO Form
-        return convert.toRecipeDto(recipe);
+        System.out.println("convertedRecipe.getIngredients() = " + convertedRecipe.getIngredients());
+        return convertedRecipe;
     }
 
     @Override
     @Transactional
     public RecipeDto findById(Integer recipeId) {
-
-        //Use recipeDAO.findById method to find Recipe
         Recipe foundRecipe = recipeDAO.findById(recipeId);
         System.out.println("foundRecipe = " + foundRecipe);
-
-        //Convert again and return the DTO Form
         return convert.toRecipeDto(foundRecipe);
     }
 
     @Override
     @Transactional
     public List<RecipeDto> findAll() {
-
-        //Use recipeDAO.findAll method to get all Recipes
         List<Recipe> recipeList = recipeDAO.findAll();
-
-        //Instantiate the DTO List
         List<RecipeDto> recipeDtoList = new ArrayList<>();
-
-        //Iterate through recipeList and add a converted instance of the Recipe to the List recipeDtoList
         recipeList.forEach((r) -> recipeDtoList.add(convert.toRecipeDto(r)));
         return recipeDtoList;
     }
@@ -108,11 +93,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @Transactional
     public RecipeDto update(RecipeFormDto formDto) {
-
-        //Use recipeDAO.update method to update existing Recipe
         Recipe original = recipeDAO.update(convert.toRecipe(formDto));
-
-        //Convert again and return the DTO Form
         return convert.toRecipeDto(original);
     }
 

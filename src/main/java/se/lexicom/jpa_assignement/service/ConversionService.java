@@ -31,7 +31,7 @@ public class ConversionService {
         //convert recipeFormDto from formDto.getRecipes()
         for(RecipeFormDto recipeFormDto : formDto.getRecipes()) {
             recipes.add(toRecipe(recipeFormDto));
-        };
+        }
         
         return new RecipeCategory(0, formDto.getCategory(), recipes);
     }

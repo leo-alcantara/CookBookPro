@@ -1,6 +1,6 @@
 package se.lexicom.jpa_assignement.controller;
 
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class RecipeIngredientControllerImpl implements RecipeIngredientControlle
 
     private final RecipeIngredientServiceImpl recipeIngredientServiceImpl;
 
-    //@Autowired
+    @Autowired
     public RecipeIngredientControllerImpl(RecipeIngredientServiceImpl recipeIngredientServiceImpl) {
         this.recipeIngredientServiceImpl = recipeIngredientServiceImpl;
     }

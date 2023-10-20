@@ -87,7 +87,7 @@ public class RecipeCategoryDAOImpl implements RecipeCategoryDAO {
     @Override
     public List<RecipeCategory> findByNameContainsIgnoreCase(String categoryName) {
 
-        //Query DB to get RecipeCategory based on the name inputed, get result list. 
+        //Query DB to get RecipeCategory based on the name inputted, get result list.
         List<RecipeCategory> recipeCategories = entityManager.createQuery("SELECT rc FROM RecipeCategory rc WHERE UPPER(rc.category) LIKE UPPER(CONCAT('%', ?1 , '%'))", RecipeCategory.class)
                 .setParameter(1, categoryName).getResultList();
         

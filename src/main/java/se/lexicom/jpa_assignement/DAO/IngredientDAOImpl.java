@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import se.lexicom.jpa_assignement.exceptions.ExceptionManager;
 import se.lexicom.jpa_assignement.entity.Ingredient;
-
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -20,9 +20,8 @@ public class IngredientDAOImpl implements IngredientDAO {
     public Ingredient create(Ingredient ingredient) throws ExceptionManager {
 
         //Check if input parameters is null, if null throw exception
-        if (ingredient == null) {
-            throw new ExceptionManager("Can not persist item: " + ingredient);
-        }
+        //if (ingredient == null) throw new ExceptionManager("Can not persist item: " + ingredient);
+
 
         //If not null, call entityManager and persist and return instance
         entityManager.persist(ingredient);
@@ -91,9 +90,8 @@ public class IngredientDAOImpl implements IngredientDAO {
     public List<Ingredient> findIngredientByNameContainsIgnoreCase(String ingredientName) throws ExceptionManager {
 
         //Check if input parameters is null, if null throw exception
-        if (ingredientName == null) {
-            throw new ExceptionManager("Can not find item: " + ingredientName);
-        }
+        //if (ingredientName == null) throw new ExceptionManager("Can not find item: " + ingredientName);
+
 
         //If not null, query DB to get ingredient based on the name inputed and making the use of streams get first result in case of duplicates and return it if found else throw exception
         List<Ingredient> ingredients = entityManager.createQuery("SELECT i FROM Ingredient i WHERE UPPER(i.ingredientName) LIKE UPPER(CONCAT('%', :ingredientName, '%'))", Ingredient.class)
