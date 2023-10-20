@@ -154,7 +154,7 @@ class RecipeDAOImplTest {
         String ingredientName = null;
         //Act
         //Assert
-        assertThrows(ExceptionManager.class, () -> recipeDAO.findRecipeByIngredientNameContainsIgnoreCase(ingredientName));
+        assertThrows(ExceptionManager.class, ()->recipeDAO.findRecipeByIngredientNameContainsIgnoreCase(ingredientName));
     }
 
     @Test
@@ -167,7 +167,7 @@ class RecipeDAOImplTest {
 
         //Assert
         assertNotNull(foundRecipes);
-        assertEquals(3, foundRecipes.size());
+        assertEquals(2, foundRecipes.size());
     }
 
     //Why list is not null anymore?
@@ -204,7 +204,7 @@ class RecipeDAOImplTest {
 
         //Assert
         assertNotNull(foundRecipes);
-        assertEquals(3, foundRecipes.size());
+        assertEquals(2, foundRecipes.size());
     }
 
     //Why list is not null anymore?

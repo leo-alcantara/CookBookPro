@@ -78,7 +78,8 @@ public class RecipeServiceImpl implements RecipeService {
     public RecipeDto findById(Integer recipeId) {
         Recipe foundRecipe = recipeDAO.findById(recipeId);
         System.out.println("foundRecipe = " + foundRecipe);
-        return convert.toRecipeDto(foundRecipe);
+        RecipeDto dto = convert.toRecipeDto(foundRecipe);
+        return dto;
     }
 
     @Override
