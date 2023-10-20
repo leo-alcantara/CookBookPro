@@ -4,10 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import se.lexicom.jpa_assignement.DAO.IngredientDAO;
-import se.lexicom.jpa_assignement.DAO.RecipeCategoryDAO;
-import se.lexicom.jpa_assignement.DAO.RecipeDAO;
-import se.lexicom.jpa_assignement.DAO.RecipeIngredientDAO;
+import se.lexicom.jpa_assignement.DAO.*;
 import se.lexicom.jpa_assignement.entity.*;
 
 import java.util.*;
@@ -26,6 +23,8 @@ class RecipeServiceImplTest {
     @Autowired
     RecipeDAO recipeDAO;
     @Autowired
+    RecipeInstructionDAO recipeInstructionDAO;
+    @Autowired
     RecipeServiceImpl recipeService;
 
     Recipe vanillaCake = new Recipe();
@@ -39,12 +38,12 @@ class RecipeServiceImplTest {
         // define ingredients
         Ingredient butter = new Ingredient("Butter");
         Ingredient milk = new Ingredient("Milk");
-        //Ingredient createdButter = ingredientDAO.create(butter);
-        //Ingredient createdMilk = ingredientDAO.create(milk);
+        Ingredient createdButter = ingredientDAO.create(butter);
+        Ingredient createdMilk = ingredientDAO.create(milk);
 
         // define RecipeIngredient
-        RecipeIngredient butterRecipeIngredients = new RecipeIngredient(butter, 200, Measurement.GRAM);
-        RecipeIngredient milkRecipeIngredients = new RecipeIngredient(milk, 2, Measurement.LITER);
+        RecipeIngredient butterRecipeIngredients = new RecipeIngredient(createdButter, 200, Measurement.GRAM);
+        RecipeIngredient milkRecipeIngredients = new RecipeIngredient(createdMilk, 2, Measurement.LITER);
         //RecipeIngredient createdButterRecipeIngredients = recipeIngredientDAO.create(butterRecipeIngredients);
         //RecipeIngredient createdMilkRecipeIngredients = recipeIngredientDAO.create(milkRecipeIngredients);
 
@@ -54,14 +53,15 @@ class RecipeServiceImplTest {
 
         // define RecipeInstruction
         RecipeInstruction vanillaCakeInstruction = new RecipeInstruction("Do it!");
-        vanillaCake.setInstructions(vanillaCakeInstruction);
+        RecipeInstruction createdRecipeInstruction = recipeInstructionDAO.create(vanillaCakeInstruction);
+        vanillaCake.setInstructions(createdRecipeInstruction);
         // define Categories
         RecipeCategory desert = new RecipeCategory("Deserts");
-        //RecipeCategory createdDesert = recipeCategoryDAO.create(desert);
+        RecipeCategory createdDesert = recipeCategoryDAO.create(desert);
 
         // assign category to recipe
         Set<RecipeCategory> categories = new HashSet<>();
-        categories.add(desert);
+        categories.add(createdDesert);
         vanillaCake.setCategories(categories);
 
     }

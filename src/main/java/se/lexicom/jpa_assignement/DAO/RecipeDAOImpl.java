@@ -64,9 +64,8 @@ public class RecipeDAOImpl implements RecipeDAO {
     @Override
     @Transactional
     public List<Recipe> findRecipeByNameContainsIgnoreCase(String recipeName) throws ExceptionManager {
-        if (recipeName == null) {
-            throw new ExceptionManager("Can not find item: " + recipeName);
-        }
+        //if (recipeName == null) throw new ExceptionManager("Can not find item: " + recipeName);
+
         return entityManager.createQuery("SELECT r FROM Recipe r WHERE UPPER(r.recipeName ) LIKE UPPER(CONCAT('%', ?1 , '%'))", Recipe.class)
                 .setParameter(1, recipeName).getResultList();
     }
