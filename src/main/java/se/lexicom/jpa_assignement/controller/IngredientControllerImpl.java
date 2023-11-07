@@ -26,31 +26,31 @@ public class IngredientControllerImpl implements IngredientController {
         this.ingredientServiceImpl = ingredientServiceImpl;
     }
 
-    @Override
+
     @PostMapping
     public ResponseEntity<IngredientDto> createIngredient(@RequestBody @Valid IngredientFormDto formDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(ingredientServiceImpl.createIngredient(formDto));
     }
 
-    @Override
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<IngredientDto> findById(@PathVariable("id") Integer ingredientId) {
         return ResponseEntity.ok(ingredientServiceImpl.findById(ingredientId));
     }
 
-    @Override
+
     @GetMapping
     public ResponseEntity<List<IngredientDto>> findAll() {
         return ResponseEntity.ok(ingredientServiceImpl.findAll());
     }
 
-    @Override
+
     @PutMapping
     public ResponseEntity<IngredientDto> update(@RequestBody @Valid IngredientFormDto formDto) {
         return ResponseEntity.ok().body(ingredientServiceImpl.update(formDto));
     }
 
-    @Override
+
     @DeleteMapping
     public ResponseEntity<Void> delete(@RequestBody Ingredient ingredient) {
         ingredientServiceImpl.delete(ingredient);
@@ -58,14 +58,14 @@ public class IngredientControllerImpl implements IngredientController {
     }
 
     //NOT SURE IF THIS IS RIGHT
-    @Override
+
     @DeleteMapping("/clear")
     public ResponseEntity<Void> clear() {
         ingredientServiceImpl.clear();
         return ResponseEntity.ok().build();
     }
 
-    @Override
+
     @GetMapping("/{ingredient-name}")
     public ResponseEntity<List<IngredientDto>> findIngredientByNameContainsIgnoreCase(@PathVariable("ingredient-name") String ingredientName) {
         return ResponseEntity.ok(ingredientServiceImpl.findIngredientByNameContainsIgnoreCase(ingredientName));

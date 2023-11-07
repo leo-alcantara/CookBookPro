@@ -24,9 +24,9 @@ public class RecipeControllerImpl implements RecipeController {
         this.recipeServiceImpl = recipeServiceImpl;
     }
 
-    /*private final List<String> SEARCHTYPES = Arrays.asList(
+    private final List<String> SEARCHTYPES = Arrays.asList(
             "all", "recipe-name", "ingredient-name", "category-name", "recipe-categories"
-    );*/
+    );
 
     @Override
     @PostMapping
@@ -50,29 +50,23 @@ public class RecipeControllerImpl implements RecipeController {
                 
         List<RecipeDto> recipeDtoList;
 
-        switch (search) {
-            case "all":
-                recipeDtoList = recipeServiceImpl.findAll();
-                break;
-            case "recipe-name":
-                String recipeName = values[0];
-                recipeDtoList = recipeServiceImpl.findRecipeByNameContainsIgnoreCase(recipeName);
-                break;
-            case "ingredient-name":
-                String ingredientName = values[0];
-                recipeDtoList = recipeServiceImpl.findRecipeByIngredientNameContainsIgnoreCase(ingredientName);
-                break;
-            case "category-name":
-                String categoryName = values[0];
-                recipeDtoList = recipeServiceImpl.findRecipeByCategoryContainsIgnoreCase(categoryName);
-                break;
+        if ("all".equals(search)) {
+            recipeDtoList = recipeServiceImpl.findAll();
+        } else if ("recipe-name".equals(search)) {
+            String recipeName = values[0];
+            recipeDtoList = recipeServiceImpl.findRecipeByNameContainsIgnoreCase(recipeName);
+        } else if ("ingredient-name".equals(search)) {
+            String ingredientName = values[0];
+            recipeDtoList = recipeServiceImpl.findRecipeByIngredientNameContainsIgnoreCase(ingredientName);
+        } else if ("category-name".equals(search)) {
+            String categoryName = values[0];
+            recipeDtoList = recipeServiceImpl.findRecipeByCategoryContainsIgnoreCase(categoryName);
             //Need to review this method implementation
-            case "recipe-categories":
-                List<String> recipeCategories = Arrays.asList(values[0], values[1], values[2]);
-                recipeDtoList = recipeServiceImpl.findRecipeSeveralCategories(recipeCategories);
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid search type");
+        } else if ("recipe-categories".equals(search)) {
+            List<String> recipeCategories = Arrays.asList(values[0], values[1], values[2]);
+            recipeDtoList = recipeServiceImpl.findRecipeSeveralCategories(recipeCategories);
+        } else {
+            throw new IllegalArgumentException("Invalid search type");
         }
         return ResponseEntity.ok(recipeDtoList);
     }
